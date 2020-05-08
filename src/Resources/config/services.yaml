@@ -8,6 +8,12 @@ services:
             - { name: sylius.gateway_configuration_type, type: stripe_checkout_session, label: prometee_stripe_checkout_session_plugin.payum_gateway_factory.stripe_checkout_session }
             - { name: form.type }
 
+    prometee_sylius_payum_stripe_checkout_session.form.type.gateway_configuration.stripe_js:
+        class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Form\Type\StripeCheckoutSessionGatewayConfigurationType
+        tags:
+            - { name: sylius.gateway_configuration_type, type: stripe_js, label: prometee_stripe_checkout_session_plugin.payum_gateway_factory.stripe_js }
+            - { name: form.type }
+
     prometee_sylius_payum_stripe_checkout_session.action.convert_payment:
         public: true
         class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Action\ConvertPaymentAction
@@ -15,3 +21,11 @@ services:
             $detailsProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.details'
         tags:
             - { name: payum.action, factory: stripe_checkout_session, alias: prometee.sylius_payum_stripe_checkout_session.convert_payment }
+
+    prometee_sylius_payum_stripe_checkout_session.action.js_convert_payment:
+        public: true
+        class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Action\ConvertPaymentAction
+        arguments:
+            $detailsProvider: '@prometee.sylius_payum_stripe_checkout_session.payment_intent_provider.details'
+        tags:
+            - { name: payum.action, factory: stripe_js, alias: prometee.sylius_payum_stripe_checkout_session.convert_payment }

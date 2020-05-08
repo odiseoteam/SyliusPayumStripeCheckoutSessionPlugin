@@ -5,7 +5,12 @@ services:
             $customerEmailProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.customer_email'
             $lineItemsProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.line_items'
             $paymentMethodTypesProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.payment_method_types'
-    
+
+    prometee.sylius_payum_stripe_checkout_session.payment_intent_provider.details:
+        class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\PaymentIntentDetailsProvider
+        arguments:
+            $paymentMethodTypesProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.payment_method_types'
+
     prometee.sylius_payum_stripe_checkout_session.provider.line_items:
         class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\LineItemsProvider
         arguments:
