@@ -22,6 +22,11 @@ class PrometeeSyliusPayumStripeCheckoutSessionExtension extends Extension
         $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
         $container->setParameter(
+            'payum.template.pay',
+            $configs['payum_template_pay']
+        );
+
+        $container->setParameter(
             'prometee_sylius_payum_stripe_checkout_session.line_item_image.imagine_filter',
             $configs['line_item_image']['imagine_filter']
         );

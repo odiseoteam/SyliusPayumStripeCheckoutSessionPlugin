@@ -29,3 +29,11 @@ services:
             $detailsProvider: '@prometee.sylius_payum_stripe_checkout_session.payment_intent_provider.details'
         tags:
             - { name: payum.action, factory: stripe_js, alias: prometee.sylius_payum_stripe_checkout_session.convert_payment }
+
+    prometee_sylius_payum_stripe_checkout_session.action.pay_action:
+        public: true
+        class: Prometee\PayumStripe\Action\Api\PayAction
+        arguments:
+            $templateName: '%payum.template.pay%'
+        tags:
+            - { name: payum.action, factory: stripe_js, alias: payum.action.pay }

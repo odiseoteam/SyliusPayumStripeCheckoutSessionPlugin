@@ -30,6 +30,9 @@ class Configuration implements ConfigurationInterface
         $node
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode('payum_template_pay')
+                    ->defaultValue('@PrometeeSyliusPayumStripeCheckoutSessionPlugin/Action/pay.html.twig')
+                ->end()
                 ->arrayNode('line_item_image')
                     ->addDefaultsIfNotSet()
                     ->children()
