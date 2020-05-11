@@ -26,7 +26,7 @@ services:
         public: true
         class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Action\ConvertPaymentAction
         arguments:
-            $detailsProvider: '@prometee.sylius_payum_stripe_checkout_session.payment_intent_provider.details'
+            $detailsProvider: '@prometee.sylius_payum_stripe_checkout_session.payment_provider.details'
         tags:
             - { name: payum.action, factory: stripe_js, alias: prometee.sylius_payum_stripe_checkout_session.convert_payment }
 

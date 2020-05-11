@@ -6,10 +6,11 @@ services:
             $lineItemsProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.line_items'
             $paymentMethodTypesProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.payment_method_types'
 
-    prometee.sylius_payum_stripe_checkout_session.payment_intent_provider.details:
-        class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\PaymentIntentDetailsProvider
+    prometee.sylius_payum_stripe_checkout_session.payment_provider.details:
+        class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\PaymentDetailsProvider
         arguments:
             $paymentMethodTypesProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.payment_method_types'
+            $customerDetailsProvider: '@prometee.sylius_payum_stripe_checkout_session.provider.customer_details'
 
     prometee.sylius_payum_stripe_checkout_session.provider.line_items:
         class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\LineItemsProvider
@@ -37,3 +38,6 @@ services:
             
     prometee.sylius_payum_stripe_checkout_session.provider.payment_method_types:
         class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\PaymentMethodTypesProvider
+
+    prometee.sylius_payum_stripe_checkout_session.provider.customer_details:
+        class: Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\CustomerDetailsProvider

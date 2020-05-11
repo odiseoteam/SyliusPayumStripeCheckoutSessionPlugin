@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Prometee\SyliusPayumStripeCheckoutSessionPlugin\Action;
 
 use Payum\Core\Action\ActionInterface;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
 use Prometee\SyliusPayumStripeCheckoutSessionPlugin\Provider\DetailsProviderInterface;
@@ -32,12 +33,18 @@ final class ConvertPaymentAction implements ActionInterface
 
         /** @var PaymentInterface $payment */
         $payment = $request->getSource();
-        /** @var OrderInterface $order */
-        $order = $payment->getOrder();
 
-        $details = $this->detailsProvider->getDetails($order);
+        /** @var ArrayObject $details */
+        $details = ArrayObject::ensureArrayObject($payment->getDetails());
 
-        $request->setResult($details);
+        if (false === $details->offsetExists('id')) {
+            /** @var OrderInterface $order */
+            $order = $payment->getOrder();
+
+            $details = $this->detailsProvider->getDetails($order);
+        }
+
+        $request->setResult((array) $details);
     }
 
     /**
